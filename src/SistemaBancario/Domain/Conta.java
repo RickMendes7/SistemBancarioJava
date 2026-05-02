@@ -2,26 +2,37 @@ package SistemaBancario.Domain;
 
 public class Conta {
 
-        public double saldo;
+    private double saldo;
 
-        public void verSaldo(){
-            System.out.println("Seu saldo é de R$"+saldo);
+    /*metodo construtor*/
+    public Conta(double saldoInicial) {
+        if (saldoInicial < 0) {
+            throw new IllegalArgumentException("Saldo inicial não pode ser negativo");
         }
-
-        public void depositar(double valor){
-            saldo += valor;
-            System.out.println("Depósito realizado!");
-        }
-
-        public void sacar(double valor){
-            if (valor<= saldo) {
-                saldo -= valor;
-                System.out.println("Saque Realizado!");
-            } else {
-                System.out.println("Saldo insuficiente");
-            }
-        }
-
+        this.saldo = saldoInicial;
     }
 
 
+    public double getSaldo() {
+        return saldo;
+    }
+
+
+    public void depositar(double valor) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor de depósito inválido");
+        }
+        saldo += valor;
+    }
+
+
+    public void sacar(double valor) {
+        if (valor <= 0) {
+            throw new IllegalArgumentException("Valor de saque inválido");
+        }
+        if (valor > saldo) {
+            throw new IllegalStateException("Saldo insuficiente");
+        }
+        saldo -= valor;
+    }
+}

@@ -5,39 +5,49 @@ import java.util.Scanner;
 
 public class SistemaBanco {
         Scanner scanner = new Scanner(java.lang.System.in);
-        Conta conta = new Conta();
+        Conta conta = new Conta(400);
 
         public void iniciar() {
             int opcao = -1;
 
-            conta.saldo = 400;
-
             while (opcao != 4) {
 
-                java.lang.System.out.println("----Menu----");
-                java.lang.System.out.println("1 - Ver Saldo");
-                java.lang.System.out.println("2 - Depositar");
-                java.lang.System.out.println("3 - Sacar");
-                java.lang.System.out.println("4 - Sair");
+                System.out.println("----Menu----");
+                System.out.println("1 - Ver Saldo");
+                System.out.println("2 - Depositar");
+                System.out.println("3 - Sacar");
+                System.out.println("4 - Sair");
 
                 java.lang.System.out.println("Selecione: ");
                 opcao = scanner.nextInt();
 
                 switch (opcao) {
                     case 1:
-                        conta.verSaldo();
+                        System.out.println("Seu saldo é de R$"+ conta.getSaldo());
                         break;
 
                     case 2:
-                        java.lang.System.out.println("Valor para depositar: ");
+                        try{
+                        System.out.println("Valor para deposito: ");
                         double deposito = scanner.nextDouble();
+
                         conta.depositar(deposito);
+                        System.out.println("Valor invalido!");
+                        }catch (Exception e){
+                            System.out.println(e.getMessage());
+                        }
                         break;
 
                     case 3:
-                        java.lang.System.out.println("Valor para Sacar: ");
+                        try{
+                        System.out.println("Valor para saque: ");
                         double saque = scanner.nextDouble();
+
                         conta.sacar(saque);
+                        System.out.println("Saque realizado com sucesso!");
+                        } catch (Exception e){
+                            System.out.println(e.getMessage());
+                        }
                         break;
 
                     case 4:
